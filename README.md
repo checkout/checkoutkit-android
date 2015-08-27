@@ -1,9 +1,9 @@
 ### Requirements
 
-Java 1.5 and later
+Java 1.6 and later
 
 ### How to use the library
-
+##TODO
 Create an Android project. Go to Module settings and add ----com.checkout:checkoutkit:1.0 ??---- as a library dependency (from Maven). compile 'com.checkout:checkoutkit:1.0'
 
 ### Example
@@ -16,30 +16,25 @@ import com.checkout.CheckoutKit;
 You will need to specify at least the public key when creating an instance of ***CheckoutKit***. We offer a wide range of constructors, the ***CheckoutKit*** instance is entirely customizable:
 
 ```html
-CheckoutKit.getInstance(String publicKey)
-CheckoutKit.getInstance(String publicKey, Environment baseUrl)
-CheckoutKit.getInstance(String publicKey, boolean logging)
-CheckoutKit.getInstance(String publicKey, Environment baseUrl, boolean logging)
-CheckoutKit.getInstance(String publicKey, boolean logging, PrintStream logger)
-CheckoutKit.getInstance(String publicKey, Environment baseUrl, boolean logging, PrintStream logger)
-CheckoutKit.getInstance(String publicKey, Environment baseUrl, PrintStream logger)
-CheckoutKit getInstance(String publicKey, PrintStream logger)
-CheckoutKit getInstance(String publicKey, boolean logging, String file)
-CheckoutKit getInstance(String publicKey, Environment baseUrl, boolean logging,  String file)
-CheckoutKit getInstance(String publicKey, Environment baseUrl, String file)
-CheckoutKit getInstance(String publicKey, String file)
-CheckoutKit getInstance() // to use only once the CheckoutKit object has been instantiated, otherwise returns null
+CheckoutKit.getInstance(String publicKey) throws CheckoutException
+CheckoutKit.getInstance(String publicKey, Environment baseUrl) throws CheckoutException
+CheckoutKit.getInstance(String publicKey, boolean debug) throws CheckoutException
+CheckoutKit.getInstance(String publicKey, Environment baseUrl, boolean debug) throws CheckoutException
+CheckoutKit.getInstance(String publicKey, boolean debug, Log logger) throws CheckoutException
+CheckoutKit.getInstance(String publicKey, Environment baseUrl, boolean debug, Log logger) throws CheckoutException
+CheckoutKit.getInstance(String publicKey, Environment baseUrl, Log logger) throws CheckoutException
+CheckoutKit getInstance(String publicKey, Log logger) throws CheckoutException
+CheckoutKit getInstance() throws CheckoutException // to use only once the CheckoutKit object has been instantiated, otherwise throws a CheckoutException
 ```
 
-These functions can throw CheckoutException (when the public key specified is invalid) or IOException (when the logging file cannot be accessed or written to).
+These functions can throw CheckoutException (when the public key specified is invalid).
 Here are more details about the parameters :
 - publicKey : String containing the public key. It is tested against the following regular expression : ^pk_(?:test_)?(?:\w{8})-(?:\w{4})-(?:\w{4})-(?:\w{4})-(?:\w{12})$. Mandatory otherwise the ***CheckoutKit*** object cannot be instantiated.
 - baseUrl : Environment object containing the information of the merchant's environment, default is SANDBOX. Optional.
-- logging : boolean, if the debug mode is activated or not, default is true. Optional.
-- logger : PrintStream object containing a stream to print to the desired logging system, default is the console (i.e. System.out). Optional.
-- file : String containing the log file name, if the file does not exist, it is created, otherwise log entries are appended. Optional.
+- debug : boolean, if the debug mode is activated or not, default is true. Optional.
+- logger : Log object printing information, warnings and errors to the console (for now). Optional.
 
-If **logging** is set to true, many actions will be traced to the logging system (either a file or the console).
+If **debug** is set to true, many actions will be traced to the logging system.
 
 The available functions of ***CheckoutKit*** can be found in the Javadoc : JAVADOC LINK.
 
@@ -49,6 +44,8 @@ Another class is available for utility functions: ***CardValidator***. It provid
 **Create card token**
 
 ```
+import com.checkout.*;
+
 public class Example {
 
     private String publicKey = "your_public_key";
@@ -71,19 +68,25 @@ public class Example {
             } else {
                 /* The field containing the actual card token */
                 CardToken ct = resp.model.getCard();
+                /* The attribute containing the card token to make a charge */
+                String cardToken = ct.getCardToken();
             }
 
-        } catch (CardException e) {
+        } catch (CardException e1) {
         	/* Happens when the card informations entered by the user are not correct. Display error message or log the error */
         	/* Type of the exception in the enum CardExceptionType. Different types are INVALID_CVV (if the CVV does not have the correct format), INVALID_EXPIRY_DATE (if the card is expired), INVALID_NUMBER (if the card's number is wrong). */
+        } catch (CheckoutException e2) {
+            /* Happens when the public key is not valid, raised during the instanciation of the CheckoutKit object */
+            /* Type of the exception in the enum CKExceptionType. Different types are NO_PUBLIC_KEY (if getInstance is called with no parameters and no public key has been provided before) and INVALID_PUBLIC_KEY (if the public key is invalid) */
         }
     }
 }
 ```
 
+
 ### Logging
-TODO
-Logging entries can be added with the function log(String message, LoggerLevel level) available for the ***CheckoutKit*** instance. The level can have the following values : LOW, MEDIUM or HIGH. The printing format is: current date (yyyy/MM/dd HH:mm:ss) - level - message. This is printed to the logger specified in the ***CheckoutKit*** instance (default is the console). The logger can be specified via the functions setLogger or getInstance. The log entries are then added to the logger specified.
+
+Most of the activity of the **CheckoutKit** is logged either as information, warning or error. All the logs are made to the console for now. Logging occurs only if the debug mode is activated (true as default, but can be explicitely set to false). The printing format is ```date (yyyy/MM/dd HH:mm:ss)  **Subject/Class name**  logged message```. The logger can be modified via the functions setLogger or getInstance. The log entries are then added to the logger specified.
 
 ### Unit Tests
 

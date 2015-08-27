@@ -73,22 +73,21 @@ public class CheckoutKit {
      *
      * @param publicKey : String containing the merchant's public key
      * @param baseUrl   : Environment object containing the information of the merchant's environment, default is SANDBOX
-     * @param logging   : boolean, if the debug mode is activated or not, default is true
+     * @param debug   : boolean, if the debug mode is activated or not, default is true
      * @param logger    : Log instance for logging purposes if debug mode is activated
      */
-    private CheckoutKit(String publicKey, Environment baseUrl, boolean logging, Log log) throws IOException {
+    private CheckoutKit(String publicKey, Environment baseUrl, boolean debug, Log log) {
         this.publicKey = publicKey;
         this.baseUrl = baseUrl;
-        this.logging = logging;
+        this.logging = debug;
         gson = new Gson();
         this.logger = log;
-        httpClient = new HttpConnector(gson, logging, logger);
+        httpClient = new HttpConnector(gson, debug, logger);
         if(logging){
             logger.info("**CheckoutKit created**  	"+ publicKey);
         }
 
     }
-
 
     /**
      * Sets the logger
@@ -113,7 +112,7 @@ public class CheckoutKit {
      * @return a unique CheckoutKit instance
      * @throws CheckoutException : if the public key is not valid
      */
-    public static CheckoutKit getInstance(String publicKey) throws CheckoutException, IOException {
+    public static CheckoutKit getInstance(String publicKey) throws CheckoutException {
         if (instance == null) {
             if (checkPK(publicKey))
                 instance = new CheckoutKit(publicKey, Environment.SANDBOX, true, Log.getLog());
@@ -131,7 +130,7 @@ public class CheckoutKit {
      * @return a unique CheckoutKit instance
      * @throws CheckoutException : if the public key is not valid
      */
-    public static CheckoutKit getInstance(String publicKey, Environment baseUrl) throws CheckoutException, IOException {
+    public static CheckoutKit getInstance(String publicKey, Environment baseUrl) throws CheckoutException {
         if (instance == null) {
             if (checkPK(publicKey))
                 instance = new CheckoutKit(publicKey, baseUrl, true, Log.getLog());
@@ -146,17 +145,17 @@ public class CheckoutKit {
      * Function used for the Singleton Pattern, returns a unique CheckoutKit instance
      *
      * @param publicKey : String containing the merchant's public key
-     * @param logging   : boolean containing the information about debug mode (overwrites true as the default mode)
+     * @param debug   : boolean containing the information about debug mode (overwrites true as the default mode)
      * @return a unique CheckoutKit instance
      * @throws CheckoutException : if the public key is not valid
      */
-    public static CheckoutKit getInstance(String publicKey, boolean logging) throws CheckoutException, IOException {
+    public static CheckoutKit getInstance(String publicKey, boolean debug) throws CheckoutException {
         if (instance == null) {
             if (checkPK(publicKey))
-                instance = new CheckoutKit(publicKey, Environment.SANDBOX, logging, Log.getLog());
+                instance = new CheckoutKit(publicKey, Environment.SANDBOX, debug, Log.getLog());
         } else {
             instance.setPublicKey(publicKey);
-            instance.setDebugMode(logging);
+            instance.setDebugMode(debug);
         }
         return instance;
     }
@@ -166,18 +165,18 @@ public class CheckoutKit {
      *
      * @param publicKey : String containing the merchant's public key
      * @param baseUrl   : Environment object containing the desired environment (overwrites SANDBOX as the default one)
-     * @param logging   : boolean containing the information about debug mode (overwrites true as the default mode)
+     * @param debug   : boolean containing the information about debug mode (overwrites true as the default mode)
      * @return a unique CheckoutKit instance
      * @throws CheckoutException : if the public key is not valid
      */
-    public static CheckoutKit getInstance(String publicKey, Environment baseUrl, boolean logging) throws CheckoutException, IOException {
+    public static CheckoutKit getInstance(String publicKey, Environment baseUrl, boolean debug) throws CheckoutException {
         if (instance == null) {
             if (checkPK(publicKey))
-                instance = new CheckoutKit(publicKey, baseUrl, logging, Log.getLog());
+                instance = new CheckoutKit(publicKey, baseUrl, debug, Log.getLog());
         } else {
             instance.setPublicKey(publicKey);
             instance.setEnvironment(baseUrl);
-            instance.setDebugMode(logging);
+            instance.setDebugMode(debug);
         }
         return instance;
     }
@@ -186,19 +185,19 @@ public class CheckoutKit {
      * Function used for the Singleton Pattern, returns a unique CheckoutKit instance
      *
      * @param publicKey : String containing the merchant's public key
-     * @param logging   : boolean containing the information about debug mode (overwrites true as the default mode)
+     * @param debug   : boolean containing the information about debug mode (overwrites true as the default mode)
      * @param logger    : Log instance for logging purposes if debug mode is activated
      * @return a unique CheckoutKit instance
      * @throws CheckoutException : if the public key is not valid
      */
-    public static CheckoutKit getInstance(String publicKey, boolean logging, Log logger) throws CheckoutException, IOException {
+    public static CheckoutKit getInstance(String publicKey, boolean debug, Log logger) throws CheckoutException {
         if (instance == null) {
             if (checkPK(publicKey))
-                instance = new CheckoutKit(publicKey, Environment.SANDBOX, logging, logger);
+                instance = new CheckoutKit(publicKey, Environment.SANDBOX, debug, logger);
         } else {
             instance.setPublicKey(publicKey);
             instance.setLogger(logger);
-            instance.setDebugMode(logging);
+            instance.setDebugMode(debug);
         }
         return instance;
     }
@@ -208,18 +207,18 @@ public class CheckoutKit {
      *
      * @param publicKey : String containing the merchant's public key
      * @param baseUrl   : Environment object containing the desired environment (overwrites SANDBOX as the default one)
-     * @param logging   : boolean containing the information about debug mode (overwrites true as the default mode)
+     * @param debug   : boolean containing the information about debug mode (overwrites true as the default mode)
      * @param logger    : Log instance for logging purposes if debug mode is activated
      * @return a unique CheckoutKit instance
      * @throws CheckoutException : if the public key is not valid
      */
-    public static CheckoutKit getInstance(String publicKey, Environment baseUrl, boolean logging, Log logger) throws CheckoutException, IOException {
+    public static CheckoutKit getInstance(String publicKey, Environment baseUrl, boolean debug, Log logger) throws CheckoutException {
         if (instance == null) {
-            if (checkPK(publicKey)) instance = new CheckoutKit(publicKey, baseUrl, logging, logger);
+            if (checkPK(publicKey)) instance = new CheckoutKit(publicKey, baseUrl, debug, logger);
         } else {
             instance.setPublicKey(publicKey);
             instance.setEnvironment(baseUrl);
-            instance.setDebugMode(logging);
+            instance.setDebugMode(debug);
             instance.setLogger(logger);
         }
         return instance;
@@ -234,7 +233,7 @@ public class CheckoutKit {
      * @return a unique CheckoutKit instance
      * @throws CheckoutException : if the public key is not valid
      */
-    public static CheckoutKit getInstance(String publicKey, Environment baseUrl, Log logger) throws CheckoutException, IOException {
+    public static CheckoutKit getInstance(String publicKey, Environment baseUrl, Log logger) throws CheckoutException {
         if (instance == null) {
             if (checkPK(publicKey)) instance = new CheckoutKit(publicKey, baseUrl, true, logger);
         } else {
@@ -253,7 +252,7 @@ public class CheckoutKit {
      * @return a unique CheckoutKit instance
      * @throws CheckoutException : if the public key is not valid
      */
-    public static CheckoutKit getInstance(String publicKey, Log logger) throws CheckoutException, IOException {
+    public static CheckoutKit getInstance(String publicKey, Log logger) throws CheckoutException {
         if (instance == null) {
             if (checkPK(publicKey))
                 instance = new CheckoutKit(publicKey, Environment.SANDBOX, true, logger);

@@ -61,7 +61,7 @@ public class GetCardToken extends ActionBarActivity {
 
             try {
                 Card card = new Card(number.getText().toString(), name.getText().toString(), expMonth.getText().toString(), expYear.getText().toString(), cvv.getText().toString());
-                CheckoutKit ck = CheckoutKit.getInstance(publicKey, Environment.getDataDirectory() + "/log.txt");
+                CheckoutKit ck = CheckoutKit.getInstance(publicKey);
                 //ck.setFileLogger("/dev/log.log");
                 final Response<CardTokenResponse> resp = ck.createCardToken(card);
                 if (resp.hasError) {
