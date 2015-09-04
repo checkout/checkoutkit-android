@@ -54,7 +54,6 @@ public class CheckoutKitTest {
         try {
             testCard = new Card("4242424242424242", "test", "06", "18", "100", billingDetails);
             testCardToken = new CardToken("06", "2018", billingDetails, "card_789E87FC-A6BF-4B74-BDB1-80BCC4DD968C", "4242", "Visa", "C96C9E67-DF9A-442A-93C5-CEEE7955314B", "test");
-            testCardToken.setCardToken("card_tok_BE4BEDC5-E804-402C-8770-10F1E8415F50");
         } catch (CardException e) {
             fail(e.getMessage());
         }
@@ -65,7 +64,7 @@ public class CheckoutKitTest {
         CheckoutKit.destroy();
         try {
             ck = CheckoutKit.getInstance("pk_test_6ff46046-30af-41d9-bf58-929022d2cd14");
-        } catch (CheckoutException|IOException e) {
+        } catch (CheckoutException e) {
             fail(e.getMessage());
         }
         ck.baseUrlOverride = "http://localhost:8080/";
@@ -106,7 +105,7 @@ public class CheckoutKitTest {
         try {
             ck = CheckoutKit.getInstance("pk_test_6ff46046-30af-419-bf58-929022d2cd");
             fail("Expected a CheckoutException to be thrown");
-        } catch (CheckoutException|IOException e) {
+        } catch (CheckoutException e) {
             assertEquals(e.getMessage(), "INVALID_PUBLIC_KEY");
         }
     }
@@ -214,7 +213,7 @@ public class CheckoutKitTest {
             Response<CardTokenResponse> resp = ck.createCardToken(c);
             assertEquals(resp.hasError, false);
 
-            System.out.println(resp.model.getCard().getCardToken());
+            System.out.println(resp.model.getCardToken());
         } catch (CheckoutException|IOException|CardException e) {
             fail(e.getMessage());
         }
@@ -241,7 +240,7 @@ public class CheckoutKitTest {
             ck = CheckoutKit.getInstance("pk_1ADBEB2D-2BEA-4F82-8ABC-EDE3A1201C8D");
 
             ck.getLogger().info("Test console log message");
-        } catch (CheckoutException|IOException e) {
+        } catch (CheckoutException e) {
             fail(e.getMessage());
         }
     }

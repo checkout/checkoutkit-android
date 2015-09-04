@@ -2,7 +2,6 @@ package com.checkout.exceptions;
 
 /**
  * Custom exception raised if any problem occurred in the communication with the server or if the public key is not valid
- * Created by manonh on 04/08/2015.
  */
 public class CheckoutException extends Exception {
 
@@ -15,7 +14,7 @@ public class CheckoutException extends Exception {
 
     /**
      * Default constructor. Adds the type of the exception to the message printed when the exception is raised
-     * @param type : CKExceptionType object containing more precise information about the error
+     * @param type CKExceptionType object containing more precise information about the error
      */
     public CheckoutException(CKExceptionType type) {
         super(type.toString());

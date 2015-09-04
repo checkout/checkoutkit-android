@@ -3,8 +3,6 @@ package com.checkout.models;
 import com.google.gson.Gson;
 
 /**
- * Created by manonh on 31/07/2015.
- *
  * Class instantiated when the createCardToken method of CheckoutKit is called, it contains all the information returned by Checkout
  */
 public class CardToken {
@@ -18,18 +16,17 @@ public class CardToken {
     private String paymentMethod;
     private String fingerprint;
     private String name;
-    private String cardToken; /* This filed is not included in the constructor because of the Json parser (and structure), it is added after */
 
     /**
      * Default constructor for a CardToken
-     * @param expiryMonth : String containing the expiring month of the card
-     * @param expiryYear : String containing the expiring year of the card
-     * @param billDetails : Object containing the billing details of the customer
-     * @param id : String containing the id of the card
-     * @param last4 : String containing the last 4 digits of the card's number
-     * @param paymentMethod : String containing the payment method corresponding to the card
-     * @param fingerprint : String containing the fingerprint corresponding to the card
-     * @param name : String corresponding the the card's owner name
+     * @param expiryMonth String containing the expiring month of the card
+     * @param expiryYear String containing the expiring year of the card
+     * @param billDetails Object containing the billing details of the customer
+     * @param id String containing the id of the card
+     * @param last4 String containing the last 4 digits of the card's number
+     * @param paymentMethod String containing the payment method corresponding to the card
+     * @param fingerprint String containing the fingerprint corresponding to the card
+     * @param name String corresponding the the card's owner name
      */
     public CardToken(String expiryMonth, String expiryYear, CustDetails billDetails, String id, String last4, String paymentMethod, String fingerprint, String name) {
         this.expiryMonth = expiryMonth;
@@ -43,24 +40,8 @@ public class CardToken {
     }
 
     /**
-     * Changes the value of the card token
-     * @param ct : String containing the new card token
-     */
-    public void setCardToken(String ct) {
-        this.cardToken = ct;
-    }
-
-    /**
-     * Getter for the card token
-     * @return : String containing the card token
-     */
-    public String getCardToken() {
-        return cardToken;
-    }
-
-    /**
      * Getter for the expiry month
-     * @return : String containing the expiry month
+     * @return String containing the expiry month
      */
     public String getExpiryMonth() {
         return expiryMonth;
@@ -68,7 +49,7 @@ public class CardToken {
 
     /**
      * Getter for the expiry year
-     * @return : String containing the expiry year
+     * @return String containing the expiry year
      */
     public String getExpiryYear() {
         return expiryYear;
@@ -76,7 +57,7 @@ public class CardToken {
 
     /**
      * Getter for the customer billing details
-     * @return : CustDetails object containing the billing details
+     * @return CustDetails object containing the billing details
      */
     public CustDetails getBillDetails() {
         return billDetails;
@@ -84,7 +65,7 @@ public class CardToken {
 
     /**
      * Getter for the card's id
-     * @return : String containing the card's id
+     * @return String containing the card's id
      */
     public String getId() {
         return id;
@@ -92,7 +73,7 @@ public class CardToken {
 
     /**
      * Getter for the 4 last digits of the card's number
-     * @return : String containing the 4 lasts digits of the card's number
+     * @return String containing the 4 lasts digits of the card's number
      */
     public String getLast4() {
         return last4;
@@ -100,7 +81,7 @@ public class CardToken {
 
     /**
      * Getter for the payment method
-     * @return : String containing the payment method corresponding to the card
+     * @return String containing the payment method corresponding to the card
      */
     public String getPaymentMethod() {
         return paymentMethod;
@@ -108,7 +89,7 @@ public class CardToken {
 
     /**
      * Getter for the card's fingerprint
-     * @return : String containing the card's fingerprint
+     * @return String containing the card's fingerprint
      */
     public String getFingerprint() {
         return fingerprint;
@@ -116,7 +97,7 @@ public class CardToken {
 
     /**
      * Getter for the card's owner name
-     * @return : String containing the name of the customer
+     * @return String containing the name of the customer
      */
     public String getName() {
         return name;
@@ -124,7 +105,7 @@ public class CardToken {
 
     /**
      * Method returning the Json representation of this instance as a String
-     * @return : String containing the Json representation
+     * @return String containing the Json representation
      */
     public String getJson() {
         Gson gson = new Gson();
@@ -133,8 +114,8 @@ public class CardToken {
 
     /**
      * Redefinition of equals for the unit tests
-     * @param o : Object to be compared to
-     * @return : boolean, if the objects are the same or not
+     * @param o Object to be compared to
+     * @return boolean, if the objects are the same or not
      */
     @Override
     public boolean equals(Object o) {
@@ -157,7 +138,6 @@ public class CardToken {
         if (fingerprint != null ? !fingerprint.equals(cardToken1.fingerprint) : cardToken1.fingerprint != null)
             return false;
         if (name != null ? !name.equals(cardToken1.name) : cardToken1.name != null) return false;
-        return !(cardToken != null ? !cardToken.equals(cardToken1.cardToken) : cardToken1.cardToken != null);
-
+        return true;
     }
 }

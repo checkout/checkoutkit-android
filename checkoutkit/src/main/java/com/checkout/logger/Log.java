@@ -5,8 +5,6 @@ import java.util.Date;
 
 /**
  * Class used to log activity in the console
- *
- * Created by manonh on 21/08/2015.
  */
 public class Log {
 
@@ -20,7 +18,7 @@ public class Log {
 
     /**
      * Static method returning the log instance (or creating the log if it is the first call), part of the singleton pattern
-     * @return : unique Log instance
+     * @return unique Log instance
      */
     public static Log getLog() {
         if (log == null) {
@@ -40,7 +38,7 @@ public class Log {
 
     /**
      * Prints an information message in the console and when it occurred
-     * @param message : String containing the message to log
+     * @param message String containing the message to log
      */
     public void info(String message) {
         printDate();
@@ -50,7 +48,7 @@ public class Log {
 
     /**
      * Prints a warning message in the console and when it occurred
-     * @param message : String containing the message to log
+     * @param message String containing the message to log
      */
     public void warn(String message) {
         printDate();
@@ -60,7 +58,7 @@ public class Log {
 
     /**
      * Prints an error message in the console and when it occurred
-     * @param message : String containing the message to log
+     * @param message String containing the message to log
      */
     public void error(String message) {
         printDate();

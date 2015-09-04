@@ -4,8 +4,6 @@ import java.util.Calendar;
 import java.util.regex.Pattern;
 
 /**
- * Created by manonh on 30/07/2015.
- *
  * Class containing verification methods about cards numbers, CVV, expiry dates, and useful constants about card types
  */
 public class CardValidator {
@@ -15,13 +13,13 @@ public class CardValidator {
 
     /**
      * enumeration representing the default cards used by Checkout
-     * String name : name of the card
-     * String pattern : regular expression matching the card's code
-     * String format : default card display format
-     * int[] cardLength : array containing all the possible lengths of the card's code
-     * int[] cvvLength : array containing all the possible lengths of the card's CVV
-     * boolean luhn : does the card's number respects the luhn validation or not
-     * boolean supported : is this card usable with Checkout services
+     * String name name of the card
+     * String pattern regular expression matching the card's code
+     * String format default card display format
+     * int[] cardLength array containing all the possible lengths of the card's code
+     * int[] cvvLength array containing all the possible lengths of the card's CVV
+     * boolean luhn does the card's number respects the luhn validation or not
+     * boolean supported is this card usable with Checkout services
      */
     public enum Cards {
 
@@ -59,7 +57,7 @@ public class CardValidator {
 
     /*
      * Test if the string is composed exclusively of digits
-     * @param entry : String to be tested
+     * @param entry String to be tested
      * @return result of the test
      */
     private static boolean isDigit(String entry) {
@@ -68,7 +66,7 @@ public class CardValidator {
 
     /*
      * Sanitizes the card's name using the regular expression above
-     * @param name : String to be cleaned
+     * @param name String to be cleaned
      * @return cleaned string
      */
     private static String sanitizeName(String name) {
@@ -77,8 +75,8 @@ public class CardValidator {
 
     /**
      * Sanitizes any string given as a parameter
-     * @param entry : String to be cleaned
-     * @param isNumber : boolean, if set, the method removes all non digit characters, otherwise only the - and spaces
+     * @param entry String to be cleaned
+     * @param isNumber boolean, if set, the method removes all non digit characters, otherwise only the - and spaces
      * @return cleaned string
      */
     public static String sanitizeEntry(String entry, boolean isNumber) {
@@ -87,7 +85,7 @@ public class CardValidator {
 
     /**
      * Returns the Cards element corresponding to the given number
-     * @param num : String containing the card's number
+     * @param num String containing the card's number
      * @return Cards element corresponding to num or null if it was not recognized
      */
     public static Cards getCardType(String num) {
@@ -107,7 +105,7 @@ public class CardValidator {
 
     /*
      * Applies the Luhn Algorithm to the given card number
-     * @param num : String containing the card's number to be tested
+     * @param num String containing the card's number to be tested
      * @return boolean containing the result of the computation
      */
     private static boolean validateLuhnNumber(String num) {
@@ -132,7 +130,7 @@ public class CardValidator {
 
     /**
      * Checks if the card's number is valid by identifying the card's type and checking its conditions
-     * @param num : String containing the card's code to be verified
+     * @param num String containing the card's code to be verified
      * @return boolean containing the result of the verification
      */
     public static boolean validateCardNumber(String num) {
@@ -148,7 +146,7 @@ public class CardValidator {
                         break;
                     }
                 }
-                return len && (c.luhn == false || validateLuhnNumber(num));
+                return len && (!c.luhn || validateLuhnNumber(num));
             }
         }
         return false;
@@ -156,8 +154,8 @@ public class CardValidator {
 
     /**
      * Checks if the card is still valid
-     * @param month : String containing the expiring month of the card
-     * @param year : String containing the expiring year of the card
+     * @param month String containing the expiring month of the card
+     * @param year String containing the expiring year of the card
      * @return boolean containing the result of the verification
      */
     public static boolean validateExpiryDate(String month, String year) {
@@ -177,23 +175,23 @@ public class CardValidator {
 
     /**
      * Checks if the card is still valid
-     * @param month : int containing the expiring month of the card
-     * @param year : int containing the expiring year of the card
+     * @param month int containing the expiring month of the card
+     * @param year int containing the expiring year of the card
      * @return boolean containing the result of the verification
      */
     public static boolean validateExpiryDate(int month, int year) {
         if (month < 1 || year < 1) return false;
         Calendar cal = Calendar.getInstance();
         int curMonth = cal.get(Calendar.MONTH) + 1;
-        int curYear = cal.get(Calendar.YEAR) + 1;
+        int curYear = cal.get(Calendar.YEAR);
         if(year < 100) curYear -= 2000;
         return (curYear == year) ? curMonth <= month : curYear < year;
     }
 
     /**
      * Checks if the CVV is valid for a given card's type
-     * @param cvv : String containing the value of the CVV
-     * @param card : Cards element containing the card's type
+     * @param cvv String containing the value of the CVV
+     * @param card Cards element containing the card's type
      * @return boolean containing the result of the verification
      */
     public static boolean validateCVV(String cvv, Cards card) {
@@ -206,8 +204,8 @@ public class CardValidator {
 
     /**
      * Checks if the CVV is valid for a given card's type
-     * @param cvv : int containing the value of the CVV
-     * @param card : Cards element containing the card's type
+     * @param cvv int containing the value of the CVV
+     * @param card Cards element containing the card's type
      * @return boolean containing the result of the verification
      */
     public static boolean validateCVV(int cvv, Cards card) {

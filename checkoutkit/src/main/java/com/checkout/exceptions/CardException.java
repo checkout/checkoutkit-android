@@ -2,7 +2,6 @@ package com.checkout.exceptions;
 
 /**
  * Custom exception raised when any of the card's details is not valid
- * Created by manonh on 04/08/2015.
  */
 public class CardException extends Exception {
 
@@ -15,7 +14,7 @@ public class CardException extends Exception {
 
     /**
      * Default constructor. Adds the type of the exception to the message printed when the exception is raised
-     * @param type : CardExceptionType object containing more precise information about the error
+     * @param type CardExceptionType object containing more precise information about the error
      */
     public CardException(CardExceptionType type) {
         super(type.toString());
@@ -40,5 +39,9 @@ public class CardException extends Exception {
     public CardException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace)
     {
         super(message, cause, enableSuppression, writableStackTrace);
+    }
+
+    public CardExceptionType getType() {
+        return type;
     }
 }

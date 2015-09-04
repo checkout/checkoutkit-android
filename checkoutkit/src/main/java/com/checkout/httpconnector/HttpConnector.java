@@ -16,8 +16,6 @@ import java.util.logging.Logger;
 
 /**
  * Class used to manage the http connections with Checkout's server. Serves as an abstraction for get and post requests
- *
- * Created by manonh on 07/08/2015.
  */
 public class HttpConnector {
 
@@ -34,9 +32,9 @@ public class HttpConnector {
 
     /**
      * Default constructor
-     * @param gsonInstance : gson object used for JSON parsing
-     * @param debug : Boolean if we need to log activity or not
-     * @param logger : Log object, where to log if debug is true
+     * @param gsonInstance gson object used for JSON parsing
+     * @param debug Boolean if we need to log activity or not
+     * @param logger Log object, where to log if debug is true
      */
     public HttpConnector(Gson gsonInstance, boolean debug, Log logger){
         this.debug = debug;
@@ -46,7 +44,7 @@ public class HttpConnector {
 
     /**
      * Setter for the debug boolean
-     * @param debug : Boolean containing the new value for debug
+     * @param debug Boolean containing the new value for debug
      */
     public void setDebug(boolean debug) {
         this.debug = debug;
@@ -54,15 +52,15 @@ public class HttpConnector {
 
     /*
      * Private method handling the sending and receiving of the HTTP requests
-     * @param uri : String containing the url the request is sent to
-     * @param apiKey : String containing the public key of the merchant
-     * @param method : String containing the HTTP method
-     * @param payload : String containing the payload to be sent (for a POST request)
-     * @param returnType : T instance returned by the server
+     * @param uri String containing the url the request is sent to
+     * @param apiKey String containing the public key of the merchant
+     * @param method String containing the HTTP method
+     * @param payload String containing the payload to be sent (for a POST request)
+     * @param returnType T instance returned by the server
      * @param <T>
-     * @return : Response<T>, Response object containing a T instance corresponding to the server's response
-     * @throws IOException : If there is a problem with the communication with the server
-     * @throws JsonSyntaxException : If the JSON is not correct, it cannot be parsed
+     * @return Response<T>, Response object containing a T instance corresponding to the server's response
+     * @throws IOException If there is a problem with the communication with the server
+     * @throws JsonSyntaxException If the JSON is not correct, it cannot be parsed
      */
     private <T> Response<T> sendRequest(String uri,String apiKey,HttpMethods method, String payload,Class<T> returnType) throws IOException,JsonSyntaxException {
         com.checkout.httpconnector.Response<T> response = null;
@@ -109,7 +107,7 @@ public class HttpConnector {
                 }
 
                 if(debug){
-                    logger.info("** HttpResponse**  Status 200 OK :"+json);
+                    logger.info("** HttpResponse**  Status 200 OK"+json);
                 }
 
                 jsonObject = gson.fromJson(json.toString(),returnType);
@@ -168,14 +166,14 @@ public class HttpConnector {
 
     /**
      * Method allowing to send a POST request to a given url with a payload
-     * @param url : String containing the url the request must be sent to
-     * @param key : String containing the public key of the merchant
-     * @param payload : String containing the data to be sent with the request
-     * @param returnType : T instance returned by the server
+     * @param url String containing the url the request must be sent to
+     * @param key String containing the public key of the merchant
+     * @param payload String containing the data to be sent with the request
+     * @param returnType T instance returned by the server
      * @param <T>
-     * @return : Response<T>, Response object containing a T instance corresponding to the server's response
-     * @throws IOException : If there is a problem with the communication with the server
-     * @throws JsonSyntaxException : If the JSON is not correct, it cannot be parsed
+     * @return Response<T>, Response object containing a T instance corresponding to the server's response
+     * @throws IOException If there is a problem with the communication with the server
+     * @throws JsonSyntaxException If the JSON is not correct, it cannot be parsed
      */
     public <T> Response<T> postRequest(String url,String key,String payload,Class<T> returnType) throws JsonSyntaxException, IOException {
 
@@ -184,13 +182,13 @@ public class HttpConnector {
 
     /**
      * Method allowing to send a GET request to a given url
-     * @param url : String containing the url the request must be sent to
-     * @param key : String containing the public key of the merchant
-     * @param returnType : T instance returned by the server
+     * @param url String containing the url the request must be sent to
+     * @param key String containing the public key of the merchant
+     * @param returnType T instance returned by the server
      * @param <T>
-     * @return : Response<T>, Response object containing a T instance corresponding to the server's response
-     * @throws IOException : If there is a problem with the communication with the server
-     * @throws JsonSyntaxException : If the JSON is not correct, it cannot be parsed
+     * @return Response<T>, Response object containing a T instance corresponding to the server's response
+     * @throws IOException If there is a problem with the communication with the server
+     * @throws JsonSyntaxException If the JSON is not correct, it cannot be parsed
      */
     public <T> Response<T> getRequest(String url,String key,Class<T> returnType) throws JsonSyntaxException, IOException{
 

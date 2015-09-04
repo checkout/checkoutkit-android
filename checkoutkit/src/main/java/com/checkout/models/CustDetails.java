@@ -2,7 +2,6 @@ package com.checkout.models;
 
 /**
  * Class used to represent customer's details
- * Created by manonh on 03/08/2015.
  */
 public class CustDetails {
 
@@ -16,14 +15,14 @@ public class CustDetails {
 
     /**
      * Default constructor
-     * @param address1 : String containing the first line of the customer's address
-     * @param address2 : String containing the second line of the customer's address
-     * @param postCode : String containing the postal code of the customer's address
-     * @param country : String containing the country of the customer's address
-     * @param city : String containing the city of the customer's address
-     * @param state : String containing the state of the customer's address
-     * @param phoneCountryCode : String containing the country code of the customer
-     * @param phoneNumber : String containing the phone number of the customer
+     * @param address1 String containing the first line of the customer's address
+     * @param address2 String containing the second line of the customer's address
+     * @param postCode String containing the postal code of the customer's address
+     * @param country String containing the country of the customer's address
+     * @param city String containing the city of the customer's address
+     * @param state String containing the state of the customer's address
+     * @param phoneCountryCode String containing the country code of the customer
+     * @param phoneNumber String containing the phone number of the customer
      */
     public CustDetails(String address1, String address2, String postCode, String country, String city, String state, String phoneCountryCode, String phoneNumber) {
         this.address1 = address1;
@@ -37,7 +36,7 @@ public class CustDetails {
 
     /**
      * Getter for the customer's address
-     * @return : String containing the first line of the customer's address
+     * @return String containing the first line of the customer's address
      */
     public String getAddress1() {
         return address1;
@@ -45,7 +44,7 @@ public class CustDetails {
 
     /**
      * Getter for the customer's address
-     * @return : String containing the second line of the customer's address
+     * @return String containing the second line of the customer's address
      */
     public String getAddress2() {
         return address2;
@@ -53,7 +52,7 @@ public class CustDetails {
 
     /**
      * Getter for the customer's postal code
-     * @return : String containing the postal code of the customer's address
+     * @return String containing the postal code of the customer's address
      */
     public String getPostCode() {
         return postCode;
@@ -61,7 +60,7 @@ public class CustDetails {
 
     /**
      * Getter for the customer's country
-     * @return : String containing the country of the customer's address
+     * @return String containing the country of the customer's address
      */
     public String getCountry() {
         return country;
@@ -69,7 +68,7 @@ public class CustDetails {
 
     /**
      * Getter for the customer's city
-     * @return : String containing the city of the customer's address
+     * @return String containing the city of the customer's address
      */
     public String getCity() {
         return city;
@@ -77,7 +76,7 @@ public class CustDetails {
 
     /**
      * Getter for the customer's state
-     * @return : String containing the state of the customer's address
+     * @return String containing the state of the customer's address
      */
     public String getState() {
         return state;
@@ -85,7 +84,7 @@ public class CustDetails {
 
     /**
      * Getter for the customer's country code
-     * @return : String containing the customer's country code
+     * @return String containing the customer's country code
      */
     public String getCountryCode() {
         return phone.getCountryCode();
@@ -93,7 +92,7 @@ public class CustDetails {
 
     /**
      * Getter for the customer's phone number
-     * @return : String containing the customer's phone number
+     * @return String containing the customer's phone number
      */
     public String getNumber() {
         return phone.getNumber();
@@ -129,8 +128,8 @@ public class CustDetails {
 
         /**
          * Default constructor. The Phone object should be instantiated via the CustDetails constructor
-         * @param countryCode : String containing the customer's country code
-         * @param number : String containing the customer's phone number
+         * @param countryCode String containing the customer's country code
+         * @param number String containing the customer's phone number
          */
         public Phone(String countryCode, String number) {
             this.number = number;
@@ -139,7 +138,7 @@ public class CustDetails {
 
         /**
          * Getter for the customer's country code
-         * @return : String containing the customer's country code
+         * @return String containing the customer's country code
          */
         public String getCountryCode() {
             return countryCode;
@@ -147,7 +146,7 @@ public class CustDetails {
 
         /**
          * Getter for the customer's phone number
-         * @return : String containing the customer's phone number
+         * @return String containing the customer's phone number
          */
         public String getNumber() {
             return number;

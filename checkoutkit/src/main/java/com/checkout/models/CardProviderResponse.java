@@ -1,9 +1,5 @@
 package com.checkout.models;
 
-/**
- * Created by manonh on 07/08/2015.
- */
-
 import java.util.List;
 
 /**
@@ -17,9 +13,9 @@ public class CardProviderResponse {
 
     /**
      * Default constructor
-     * @param object : String containing type of the JSON data
-     * @param count : int containing the number of elements in the JSON data
-     * @param data : String containing the JSON data
+     * @param object String containing type of the JSON data
+     * @param count int containing the number of elements in the JSON data
+     * @param data String containing the JSON data
      */
     public CardProviderResponse(String object, int count, List<CardProvider> data) {
         this.object = object;
@@ -29,7 +25,7 @@ public class CardProviderResponse {
 
     /**
      * Getter for the JSON data as a Java object
-     * @return : Object instance corresponding of the returned JSON response
+     * @return Object instance corresponding of the returned JSON response
      */
     public List<CardProvider> getData() {
         return data;

@@ -3,10 +3,12 @@
 Java 1.6 and later
 
 ### How to use the library
-##TODO
+###TODO
 Create an Android project. Go to Module settings and add ----com.checkout:checkoutkit:1.0 ??---- as a library dependency (from Maven). compile 'com.checkout:checkoutkit:1.0'
 
 ### Example
+
+A demo application is available in the folder *app*
 
 Import the **CheckoutKit.java** in your code as below:
 ```
@@ -29,7 +31,7 @@ CheckoutKit getInstance() throws CheckoutException // to use only once the Check
 
 These functions can throw CheckoutException (when the public key specified is invalid).
 Here are more details about the parameters :
-- publicKey : String containing the public key. It is tested against the following regular expression : ^pk_(?:test_)?(?:\w{8})-(?:\w{4})-(?:\w{4})-(?:\w{4})-(?:\w{12})$. Mandatory otherwise the ***CheckoutKit*** object cannot be instantiated.
+- publicKey : String containing the public key. It is tested against the following regular expression : ```^pk_(?:test_)?(?:\w{8})-(?:\w{4})-(?:\w{4})-(?:\w{4})-(?:\w{12})$```. Mandatory otherwise the ***CheckoutKit*** object cannot be instantiated.
 - baseUrl : Environment object containing the information of the merchant's environment, default is SANDBOX. Optional.
 - debug : boolean, if the debug mode is activated or not, default is true. Optional.
 - logger : Log object printing information, warnings and errors to the console (for now). Optional.
@@ -66,14 +68,14 @@ public class Example {
             if (resp.hasError) {
                 /* Print error message or handle it */
             } else {
-                /* The field containing the actual card token */
+                /* The card object */
                 CardToken ct = resp.model.getCard();
-                /* The attribute containing the card token to make a charge */
-                String cardToken = ct.getCardToken();
+                /* The field containing the card token to make a charge */
+                String cardToken = resp.model.getCardToken();
             }
 
         } catch (CardException e1) {
-        	/* Happens when the card informations entered by the user are not correct. Display error message or log the error */
+        	/* Happens when the card informations entered by the user are not correct. */
         	/* Type of the exception in the enum CardExceptionType. Different types are INVALID_CVV (if the CVV does not have the correct format), INVALID_EXPIRY_DATE (if the card is expired), INVALID_NUMBER (if the card's number is wrong). */
         } catch (CheckoutException e2) {
             /* Happens when the public key is not valid, raised during the instanciation of the CheckoutKit object */

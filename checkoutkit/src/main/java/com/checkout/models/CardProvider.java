@@ -2,7 +2,6 @@ package com.checkout.models;
 
 /**
  * Class used to represent a card provider
- * Created by manonh on 03/08/2015.
  */
 public class CardProvider {
     private String id;
@@ -11,9 +10,9 @@ public class CardProvider {
 
     /**
      * Default constructor
-     * @param id : String containing the id of the card provider
-     * @param name : String containing the name of the card provider
-     * @param cvvRequired : boolean, if the cvv is required for this card provider
+     * @param id String containing the id of the card provider
+     * @param name String containing the name of the card provider
+     * @param cvvRequired boolean, if the cvv is required for this card provider
      */
     public CardProvider(String id, String name, boolean cvvRequired) {
         this.id = id;
