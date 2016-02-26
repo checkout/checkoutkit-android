@@ -3,8 +3,8 @@
 Java 1.6 and later
 
 ### How to use the library
-###TODO
-Create an Android project. Go to Module settings and add ----com.checkout:checkoutkit:1.0 ??---- as a library dependency (from Maven). compile 'com.checkout:checkoutkit:1.0'
+
+Download ```checkoutkit.jar``` and use it as an external library in your IDE.
 
 ### Example
 
