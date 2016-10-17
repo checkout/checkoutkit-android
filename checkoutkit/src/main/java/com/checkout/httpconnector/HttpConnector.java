@@ -83,6 +83,7 @@ public class HttpConnector {
             connection.setUseCaches(false);
             connection.setRequestProperty("Content-Type", "application/json");
             connection.setRequestProperty("Authorization", apiKey);
+            connection.setRequestProperty("Client-Id", "MobileKit.Android");
             connection.setDoOutput(true);
 
             connection.connect();
