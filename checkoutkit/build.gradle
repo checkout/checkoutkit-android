@@ -1,9 +1,8 @@
 apply plugin: 'java'
-
-
-
 dependencies {
     testCompile 'junit:junit:4.+'
     compile 'com.google.code.gson:gson:2.3.1'
     testCompile 'com.github.tomakehurst:wiremock:1.57'
+    sourceCompatibility = 1.7
+    targetCompatibility = 1.7
 }

@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Checkout.iml" filepath="$PROJECT_DIR$/Checkout.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/checkoutkit/checkoutkit.iml" filepath="$PROJECT_DIR$/checkoutkit/checkoutkit.iml" />
+      <module fileurl="file://$PROJECT_DIR$/checkoutkit-android.iml" filepath="$PROJECT_DIR$/checkoutkit-android.iml" />
     </modules>
   </component>
 </project>

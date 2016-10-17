@@ -1,6 +1,6 @@
 ### Requirements
 
-JDK 1.6 or 1.7
+JDK 1.8
 
 ### How to use the library
 
