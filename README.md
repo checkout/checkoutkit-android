@@ -6,6 +6,8 @@ JDK 1.8
 
 Download ```checkoutkit.jar``` and use it as an external library in your IDE.
 
+Add ```compile 'com.android.support:appcompat-v7:23.2.1'``` to your application's ```build.gradle``` file.
+
 ### Example
 
 A demo application is available in the folder *app*
