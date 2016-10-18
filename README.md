@@ -6,7 +6,7 @@ JDK 1.8
 
 Download ```checkoutkit.jar``` and use it as an external library in your IDE.
 
-Add ```compile 'com.android.support:appcompat-v7:23.2.1'``` to your application's ```build.gradle``` file.
+Add ```compile 'com.google.code.gson:gson:2.2.4'``` to your application's ```build.gradle``` file.
 
 ### Example
 
