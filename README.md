@@ -40,9 +40,9 @@ Here are more details about the parameters :
 
 If **debug** is set to true, many actions will be traced to the logging system.
 
-The available functions of ***CheckoutKit*** can be found in the Javadoc : JAVADOC LINK.
+The available functions of ***CheckoutKit*** can be found [here](http://docs.checkout.com/mobile/android-kit/reference/checkoutkit)
 
-Another class is available for utility functions: ***CardValidator***. It provides static functions for validating all the card related information before processing them. The list of the available functions is available in the Javadoc : JAVADOC LINK.
+Another class is available for utility functions: ***CardValidator***. It provides static functions for validating all the card related information before processing them. The list of the available functions is available in [here](http://docs.checkout.com/mobile/android-kit/reference/cardvalidator)
 
 
 **Create card token**
@@ -58,7 +58,7 @@ public class Example {
 
         try {
 
-        	/* Take the card information where ever you want (form, fields in the application page...) */
+            /* Take the card information where ever you want (form, fields in the application page...) */
             Card card = new Card(number.getText().toString(), name.getText().toString(), expMonth.getText().toString(), expYear.getText().toString(), cvv.getText().toString());
 
             /* Instantiates the CheckoutKit object with the minimum parameters, default configuration for the other ones */
@@ -77,8 +77,8 @@ public class Example {
             }
 
         } catch (CardException e1) {
-        	/* Happens when the card informations entered by the user are not correct. */
-        	/* Type of the exception in the enum CardExceptionType. Different types are INVALID_CVV (if the CVV does not have the correct format), INVALID_EXPIRY_DATE (if the card is expired), INVALID_NUMBER (if the card's number is wrong). */
+            /* Happens when the card informations entered by the user are not correct. */
+            /* Type of the exception in the enum CardExceptionType. Different types are INVALID_CVV (if the CVV does not have the correct format), INVALID_EXPIRY_DATE (if the card is expired), INVALID_NUMBER (if the card's number is wrong). */
         } catch (CheckoutException e2) {
             /* Happens when the public key is not valid, raised during the instanciation of the CheckoutKit object */
             /* Type of the exception in the enum CKExceptionType. Different types are NO_PUBLIC_KEY (if getInstance is called with no parameters and no public key has been provided before) and INVALID_PUBLIC_KEY (if the public key is invalid) */
@@ -87,6 +87,66 @@ public class Example {
 }
 ```
 
+**Usage within an Android app**
+
+Calls to getCardProviders and createCardToken need to be done through a ConnectionTask as shown below:
+
+```
+public class GetCardToken extends ActionBarActivity {
+
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        /* ... */
+
+        /* Clicking on the button starts the create card token process */
+        final Button button = (Button) findViewById(R.id.button);
+
+        button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                try {
+                    new ConnectionTask().execute("");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+    /* We need to create a ConnectionTask class because networking requests cannot be handled in the main thread */
+    class ConnectionTask extends AsyncTask<String, Void, String> {
+        @Override
+        protected String doInBackground(String... urls) {
+            /* All the fields that need to be filled with the card information */
+            final EditText name = (EditText) findViewById(R.id.name);
+            final EditText number = (EditText) findViewById(R.id.number);
+            final EditText expMonth = (EditText) findViewById(R.id.expMonth);
+            final EditText expYear = (EditText) findViewById(R.id.expYear);
+            final EditText cvv = (EditText) findViewById(R.id.cvv);
+
+            try {
+                /* Create the card object */
+                Card card = new Card(number.getText().toString(), name.getText().toString(), expMonth.getText().toString(), expYear.getText().toString(), cvv.getText().toString());
+                /* Create the CheckoutKit instance */
+                CheckoutKit ck = CheckoutKit.getInstance(publicKey);
+
+                final Response<CardTokenResponse> resp = ck.createCardToken(card);
+                if (resp.hasError) {
+                    /* Handle errors */
+                } else {
+                    /* The card token */
+                    String cardToken = resp.model.getCardToken();
+                }
+            } catch (final CardException e1) {
+                /* Handle validation errors */
+            } catch (final CheckoutException e2) {
+                /* Handle errors related to the CheckoutKit creation */
+            }
+            return "";
+        }
+    }
+}
+```
 
 ### Logging
 
