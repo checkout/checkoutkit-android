@@ -2,6 +2,8 @@
 
 JDK 1.8
 
+If you are using JDK 1.6 or 1.7, refer to [CheckoutKit Android 1.6.0](https://github.com/checkout/checkoutkit-android/tree/1.6.0).
+
 ### How to use the library
 
 Download ```checkoutkit.jar``` and use it as an external library in your IDE.

@@ -44,7 +44,7 @@ public class CheckoutKit {
      * Enum containing the different environments for generating the tokens, it contains the URL corresponding to the environment
      */
     public enum Environment {
-        SANDBOX("http://sandbox.checkout.com/api2/v2/"), LIVE("https://api2.checkout.com/v2/");
+        SANDBOX("https://sandbox.checkout.com/api2/v2/"), LIVE("https://api2.checkout.com/v2/");
 
         private String url;
 
