@@ -157,3 +157,11 @@ Most of the activity of the **CheckoutKit** is logged either as information, war
 ### Unit Tests
 
 All the unit test written with JUnit (v4) and resides in the test package.
+
+### Proguard compatibility
+
+When using Proguard in an app release, add the below line inside the proguard-rules.pro file:
+
+```
+-keep class com.checkout.** { *; }
+```
