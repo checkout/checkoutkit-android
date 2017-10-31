@@ -23,7 +23,7 @@ public class CardValidator {
      */
     public enum Cards {
 
-        MAESTRO("maestro", "^(5018|5020|5038|6304|6759|6761|6763)[0-9]{8,15}$", DEFAULT_CARD_FORMAT, new int[]{12,13,14,15,16,17,18,19}, new int[]{3}, true, true),
+        MAESTRO("maestro", "^(5[06-9]|6[37])[0-9]{10,17}$", DEFAULT_CARD_FORMAT, new int[]{12,13,14,15,16,17,18,19}, new int[]{3}, true, true),
         MASTERCARD("mastercard", "^5[1-5][0-9]{14}$", DEFAULT_CARD_FORMAT, new int[]{16,17}, new int[]{3}, true, true), //check supported
         DINERSCLUB("dinersclub", "^3(?:0[0-5]|[68][0-9])?[0-9]{11}$", "(\\d{1,4})(\\d{1,6})?(\\d{1,4})?", new int[]{14}, new int[]{3}, true, true), //check supported
         LASER("laser", "^(6304|6706|6709|6771)[0-9]{12,15}$", DEFAULT_CARD_FORMAT, new int[]{16,17,18,19}, new int[]{3}, true, false),
