@@ -1,3 +1,5 @@
+> :warning: This mobile SDK is built on top of Checkout.com's Classic API and is not actively maintained. Please refer to our [Frames Android SDK](https://github.com/checkout/frames-android/) instead.
+
 ### Requirements
 
 JDK 1.8
